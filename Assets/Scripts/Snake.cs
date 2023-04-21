@@ -63,4 +63,12 @@ public class Snake : MonoBehaviour
         float y = transform.position.y + direction.y;
         transform.position = new Vector2(x, y);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Collision")
+        {
+            Time.timeScale = 0;
+        }
+    }
 }
