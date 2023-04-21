@@ -14,8 +14,8 @@ public class Snake : MonoBehaviour
 
     void reset()
     {
-        transform.SetPositionAndRotation(new Vector2(-0.48f, -0.3f), // Set start point, f for float
-            Quaternion.Euler(0, 0, -90));                            // Point Snake right
+        transform.SetPositionAndRotation(new Vector2(0f, 0f),    // Set start point, f for float
+            Quaternion.Euler(0, 0, -90));                       // Point Snake right
         direction = Vector2.right;
         Time.timeScale = 0.05f;
     }
