@@ -11,11 +11,11 @@ public class SnakeMovement
     {
         var gameObject = new GameObject();
         var snake = gameObject.AddComponent<Snake>();
-        snake.transform.SetPositionAndRotation(new Vector2(-0.48f, -0.3f),
+        snake.transform.SetPositionAndRotation(new Vector2(0f, 0f),
             Quaternion.Euler(0, 0, -90));
 
         yield return new WaitForSeconds(0.07f);    // Let Snake move
 
-        Assert.AreNotEqual(snake.transform.position, new Vector3(-0.48f, -0.3f, 0)); // Snake has moved from start position
+        Assert.AreNotEqual(snake.transform.position, new Vector3(0f, 0f, 0)); // Snake has moved from start position
     }
 }

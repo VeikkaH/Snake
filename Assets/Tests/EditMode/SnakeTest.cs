@@ -14,11 +14,11 @@ public class SpawnTest
         var snake = gameObject.AddComponent<Snake>();
         
         // ACT
-        snake.transform.SetPositionAndRotation(new Vector2(-0.48f, -0.3f),
+        snake.transform.SetPositionAndRotation(new Vector2(0f, 0f),
             Quaternion.Euler(0, 0, -90));
 
         // ASSERT
-        Assert.AreEqual(snake.transform.position, new Vector3(-0.48f, -0.3f, 0));
+        Assert.AreEqual(snake.transform.position, new Vector3(0f, 0f, 0f));
 
     }
     
@@ -30,7 +30,7 @@ public class SpawnTest
         var snake = gameObject.AddComponent<Snake>();
 
         // ACT
-        snake.transform.SetPositionAndRotation(new Vector2(-0.48f, -0.3f),
+        snake.transform.SetPositionAndRotation(new Vector2(0f, 0f),
             Quaternion.Euler(0, 0, -90));
 
         // ASSERT
