@@ -15,7 +15,7 @@ public class Food : MonoBehaviour
         transform.position = new Vector2(x, y);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         randomPosition();
     }

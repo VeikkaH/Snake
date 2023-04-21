@@ -6,7 +6,10 @@ public class Snake : MonoBehaviour
 {
     public Vector2 direction;
     public GameObject segment;
-    List<GameObject> segments = new List<GameObject>();
+    public List<GameObject> segments = new List<GameObject>();
+    public bool IsGamePaused { get; private set; } // For collision PlayMode Testing
+    public bool IsTesting { get; set; }            // For collision PlayMode Testing
+
     void Start()
     {
         reset();
@@ -18,6 +21,7 @@ public class Snake : MonoBehaviour
             Quaternion.Euler(0, 0, -90));                        // Point Snake right
         direction = Vector2.right;
         Time.timeScale = 0.1f;
+        IsGamePaused = false;
         resetSegments();
     }
 
@@ -38,9 +42,12 @@ public class Snake : MonoBehaviour
     }
     void grow()
     {
-        GameObject newSegment = Instantiate(segment);
-        newSegment.transform.position = segments[segments.Count - 1].transform.position;
-        segments.Add(newSegment);
+        if (segment != null)
+        {
+            GameObject newSegment = Instantiate(segment);
+            newSegment.transform.position = segments[segments.Count - 1].transform.position;
+            segments.Add(newSegment);
+        }
     }
     void Update()
     {
@@ -94,11 +101,17 @@ public class Snake : MonoBehaviour
         transform.position = new Vector2(x, y);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Collision")
         {
-            Time.timeScale = 0;
+            IsGamePaused = true;
+
+            if (!IsTesting)
+            {
+                Time.timeScale = 0;
+            }
+
         } else if (other.tag == "Food")
         {
             grow();
