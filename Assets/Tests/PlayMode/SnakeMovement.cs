@@ -11,6 +11,9 @@ public class SnakeMovement
     {
         var gameObject = new GameObject();
         var snake = gameObject.AddComponent<Snake>();
+
+        snake.segment = Resources.Load<GameObject>("SnakeBody");
+
         snake.transform.SetPositionAndRotation(new Vector2(0f, 0f),
             Quaternion.Euler(0, 0, -90));
 
