@@ -5,8 +5,8 @@ using UnityEngine;
 public class Snake : MonoBehaviour
 {
     public Vector2 direction;
-
-    // Start is called before the first frame update
+    public GameObject segment;
+    List<GameObject> segments = new List<GameObject>();
     void Start()
     {
         reset();
@@ -15,11 +15,33 @@ public class Snake : MonoBehaviour
     void reset()
     {
         transform.SetPositionAndRotation(new Vector2(0f, 0f),    // Set start point, f for float
-            Quaternion.Euler(0, 0, -90));                       // Point Snake right
+            Quaternion.Euler(0, 0, -90));                        // Point Snake right
         direction = Vector2.right;
-        Time.timeScale = 0.05f;
+        Time.timeScale = 0.1f;
+        resetSegments();
     }
-    // Update is called once per frame
+
+    void resetSegments()
+    {
+        for (int i = 1; i<segments.Count; i++)  // Remove all segments
+        {
+            Destroy(segments[i].gameObject);
+        }
+
+        segments.Clear();            // Clear the list
+        segments.Add(gameObject);    // Add the Snake head
+
+        for (int i = 0; i < 3; i++)  // Add 3 starter segments
+        {
+            grow();
+        }
+    }
+    void grow()
+    {
+        GameObject newSegment = Instantiate(segment);
+        newSegment.transform.position = segments[segments.Count - 1].transform.position;
+        segments.Add(newSegment);
+    }
     void Update()
     {
         getUserInput();
@@ -54,9 +76,17 @@ public class Snake : MonoBehaviour
     }
     void FixedUpdate()
     {
+        moveSegments();
         moveSnake();
     }
 
+    void moveSegments()
+    {
+        for (int i = segments.Count - 1; i > 0; i--)
+        {
+            segments[i].transform.position = segments[i - 1].transform.position;
+        }
+    }
     void moveSnake()
     {
         float x = transform.position.x + direction.x;
@@ -69,6 +99,9 @@ public class Snake : MonoBehaviour
         if (other.tag == "Collision")
         {
             Time.timeScale = 0;
+        } else if (other.tag == "Food")
+        {
+            grow();
         }
     }
 }
