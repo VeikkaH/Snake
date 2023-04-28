@@ -23,6 +23,12 @@ public class Snake : MonoBehaviour
         Time.timeScale = 0.1f;
         IsGamePaused = false;
         resetSegments();
+
+        Score scoreController = FindObjectOfType<Score>();
+        if (scoreController != null)
+        {
+            scoreController.score = 0;
+        }
     }
 
     void resetSegments()
@@ -40,7 +46,7 @@ public class Snake : MonoBehaviour
             grow();
         }
     }
-    void grow()
+    public void grow()
     {
         if (segment != null)
         {
@@ -114,7 +120,12 @@ public class Snake : MonoBehaviour
 
         } else if (other.tag == "Food")
         {
-            grow();
+            grow(); 
+            Score scoreController = FindObjectOfType<Score>();
+            if (scoreController != null)
+            {
+                scoreController.score++;
+            }
         }
     }
 }

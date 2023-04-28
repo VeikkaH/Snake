@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collision
   - Food
+  - Body
   layers:
   - Default
   - TransparentFX

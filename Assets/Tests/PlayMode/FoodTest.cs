@@ -14,12 +14,12 @@ public class FoodTests
 
         // Place the snake and food close together
         snake.transform.position = Vector2.zero;
-        food.transform.position = new Vector2(0, 1);
+        food.transform.position = new Vector2(1, 0);
 
         yield return new WaitForSeconds(0.1f);
 
         // Check that the food has respawned
-        Assert.AreNotEqual(food.transform.position, new Vector2(0, 1));
+        Assert.AreNotEqual(food.transform.position, new Vector2(1, 0));
     }
 
     [UnityTest]
